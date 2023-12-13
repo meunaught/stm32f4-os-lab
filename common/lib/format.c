@@ -287,3 +287,14 @@ int vscan(const char *in, const char *fmt, va_list ap)
 	}
 	return converted;
 }
+
+int scan(const char *str, const char *fmt, ...)
+{
+	va_list ap;
+	int n;
+
+	va_start(ap, fmt);
+	n = vscan(str, fmt, ap);
+	va_end(ap);
+	return n;
+}

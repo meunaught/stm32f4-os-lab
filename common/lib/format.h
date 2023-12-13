@@ -19,5 +19,6 @@
 int vformat(char *buf, size_t size, const char *fmt, va_list ap);
 int format(char *buf, size_t size, const char *fmt, ...);
 int vscan(const char *str, const char *fmt, va_list ap);
+int scan(const char *str, const char *fmt, ...);
 
 #endif /* __FORMAT_H */
