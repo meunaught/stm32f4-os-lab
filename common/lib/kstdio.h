@@ -13,7 +13,7 @@
 /* console on USART2 */
 void kputc(char c);
 void kputs(const char *s);
-int kprintf(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+int kprintf(const char *fmt, ...);
 
 char kgetc(void);
 int ktrygetc(void);

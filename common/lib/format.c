@@ -47,7 +47,7 @@ static void emit(struct out *o, const char *s, size_t len, int width,
 		put(o, s[i]);
 }
 
-static size_t utoa(char *out, uint32_t v, unsigned base, int upper)
+static size_t utoa(char *out, unsigned v, unsigned base, int upper)
 {
 	const char *digits = upper ? "0123456789ABCDEF" : "0123456789abcdef";
 	char rev[32];
@@ -62,13 +62,13 @@ static size_t utoa(char *out, uint32_t v, unsigned base, int upper)
 	return n;
 }
 
-static size_t itoa(char *out, int32_t v)
+static size_t itoa(char *out, int v)
 {
 	if (v < 0) {
 		out[0] = '-';
-		return 1 + utoa(out + 1, 0u - (uint32_t)v, 10, 0);
+		return 1 + utoa(out + 1, 0u - (unsigned)v, 10, 0);
 	}
-	return utoa(out, (uint32_t)v, 10, 0);
+	return utoa(out, (unsigned)v, 10, 0);
 }
 
 static size_t ftoa(char *out, double v, int prec)
@@ -88,8 +88,8 @@ static size_t ftoa(char *out, double v, int prec)
 	if (v > 4294967295.0)
 		v = 4294967295.0;		/* integer part must fit 32 bits */
 
-	uint32_t whole = (uint32_t)v;
-	uint32_t frac = (uint32_t)((v - whole) * scale);
+	unsigned whole = (unsigned)v;
+	unsigned frac = (unsigned)((v - whole) * scale);
 
 	n += utoa(out + n, whole, 10, 0);
 	if (prec > 0) {
@@ -154,22 +154,22 @@ int vformat(char *buf, size_t size, const char *fmt, va_list ap)
 			break;
 		case 'd':
 		case 'i':
-			len = itoa(tmp, va_arg(ap, int32_t));
+			len = itoa(tmp, va_arg(ap, int));
 			break;
 		case 'u':
-			len = utoa(tmp, va_arg(ap, uint32_t), 10, 0);
+			len = utoa(tmp, va_arg(ap, unsigned), 10, 0);
 			break;
 		case 'x':
 		case 'X':
-			len = utoa(tmp, va_arg(ap, uint32_t), 16, *fmt == 'X');
+			len = utoa(tmp, va_arg(ap, unsigned), 16, *fmt == 'X');
 			break;
 		case 'o':
-			len = utoa(tmp, va_arg(ap, uint32_t), 8, 0);
+			len = utoa(tmp, va_arg(ap, unsigned), 8, 0);
 			break;
 		case 'p':
 			tmp[0] = '0';
 			tmp[1] = 'x';
-			len = 2 + utoa(tmp + 2, (uint32_t)va_arg(ap, void *), 16, 0);
+			len = 2 + utoa(tmp + 2, (unsigned)(uintptr_t)va_arg(ap, void *), 16, 0);
 			break;
 		case 'f':
 			len = ftoa(tmp, va_arg(ap, double), prec < 0 ? 6 : prec);
@@ -251,22 +251,22 @@ int vscan(const char *in, const char *fmt, va_list ap)
 		case 'x': {
 			unsigned base = (*fmt == 'x') ? 16 : 10;
 			const char *start;
-			uint32_t v = 0;
+			unsigned v = 0;
 			int neg = 0, d;
 
 			if (*fmt == 'd' && (*in == '-' || *in == '+'))
 				neg = (*in++ == '-');
 			start = in;
 			while ((d = digit_value(*in)) >= 0 && (unsigned)d < base) {
-				v = v * base + (uint32_t)d;
+				v = v * base + (unsigned)d;
 				in++;
 			}
 			if (in == start)
 				return converted;	/* not a number */
 			if (*fmt == 'd')
-				*va_arg(ap, int32_t *) = neg ? -(int32_t)v : (int32_t)v;
+				*va_arg(ap, int *) = neg ? -(int)v : (int)v;
 			else
-				*va_arg(ap, uint32_t *) = v;
+				*va_arg(ap, unsigned *) = v;
 			break;
 		}
 		case 's': {

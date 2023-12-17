@@ -9,7 +9,7 @@
 #define __STDIO_H
 
 /* formatting happens in user space; only the text goes through write() */
-int printf(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+int printf(const char *fmt, ...);
 int puts(const char *s);
 int readline(char *buf, int size);
 int scanf(const char *fmt, ...);
