@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "STM32F446RE",
+            "includePath": [
+                "${workspaceFolder}/common/**",
+                "${workspaceFolder}/0*/**"
+            ],
+            "defines": [],
+            "compilerPath": "arm-none-eabi-gcc",
+            "compilerArgs": ["-mcpu=cortex-m4", "-mthumb", "-ffreestanding"],
+            "cStandard": "gnu17",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}

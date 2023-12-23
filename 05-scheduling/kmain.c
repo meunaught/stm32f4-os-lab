@@ -6,6 +6,7 @@
  */
 
 /* Lesson 05: multitasking and scheduling. */
+#include <stddef.h>
 #include <stdint.h>
 #include <app.h>
 #include <kstdio.h>

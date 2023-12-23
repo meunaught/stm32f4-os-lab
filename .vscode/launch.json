@@ -1,0 +1,34 @@
+// Debug a lesson on the board with the Cortex-Debug extension and stlink.
+// Build the lesson first (Terminal > Run Build Task).
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug lesson (ST-LINK)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "stutil",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/${input:lesson}/duos.elf",
+            "device": "STM32F446RE",
+            "interface": "swd",
+            "runToEntryPoint": "kmain"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "lesson",
+            "type": "pickString",
+            "description": "Lesson to debug",
+            "options": [
+                "01-boot",
+                "02-gpio-seven-segment",
+                "03-interrupts",
+                "04-system-calls",
+                "05-scheduling",
+                "06-synchronization"
+            ],
+            "default": "01-boot"
+        }
+    ]
+}

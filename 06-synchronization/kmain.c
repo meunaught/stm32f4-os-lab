@@ -6,6 +6,7 @@
  */
 
 /* Lesson 06: synchronization with semaphores. */
+#include <stddef.h>
 #include <stdint.h>
 #include <app.h>
 #include <kstdio.h>

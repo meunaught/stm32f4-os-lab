@@ -23,12 +23,14 @@ Builds on lesson 04 (see `lesson.mk`).
    turnaround times.
 
 ```
-            task_create            schedule()            exit()
-   (new) ─────────────▶ READY ─────────────────▶ RUNNING ──────▶ TERMINATED
-                          ▲   ◀───────────────────  │
-                          │  time slice over / yield │ sem_wait (lesson 06)
-                          │                          ▼
-                          └─────── task_wake ──── BLOCKED
+ task_create()
+      │
+      ▼         schedule()                 exit() or fault
+   READY  ────────────────────▶  RUNNING  ─────────────────▶  TERMINATED
+      ▲   ◀────────────────────     │
+      │     time slice / yield      │ sem_wait() has to wait (lesson 06)
+      │                             ▼
+      └───── task_wake() ──────  BLOCKED
 ```
 
 ## Read the code
