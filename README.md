@@ -69,13 +69,6 @@ after connecting. `st-flash` may need `sudo`.
 In VS Code, *Build lesson* builds a lesson and *Debug lesson (ST-LINK)* debugs
 it with Cortex-Debug.
 
-## History
-
-This started as coursework for the operating systems lab at CSE, University
-of Dhaka (2023). Each assignment had its own branch (`se7en-segment`, `exti`,
-`syscall`, `multitasking`, `semaphore`). They were merged into `main` and
-reworked into the lessons above; the merge commits keep each branch as it was.
-
 ## Credits and license
 
 Starter code: CSE Batch 25 and Prof. Mosaddek Tushar, University of Dhaka.
