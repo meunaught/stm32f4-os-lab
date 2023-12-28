@@ -71,5 +71,4 @@ it with Cortex-Debug.
 
 ## Credits and license
 
-Starter code: CSE Batch 25 and Prof. Mosaddek Tushar, University of Dhaka.
-Lab work: Mahadi and Joyee. BSD-style license, see [LICENSE](LICENSE).
+Starter code: CSE Batch 25 and Prof. Mosaddek Tushar, University of Dhaka. BSD-style license, see [LICENSE](LICENSE).
